@@ -1,0 +1,72 @@
+{
+  "products": {
+    "sme_green_loan": {
+      "product_name": "SME Green Sustainability Loan",
+      "currency_base": "SGD / IDR / INR / MYR",
+      "min_apr_percent": 4.5,
+      "max_apr_percent": 7.2,
+      "max_tenure_years": 5,
+      "min_business_history_years": 2,
+      "max_facility_sgd": 1000000,
+      "esg_requirement": "Submission of verified Green Energy or Carbon Reduction roadmap required within 90 days.",
+      "cooling_off_period_days": 14,
+      "strict_prohibitions": [
+        "Never promise APR below 4.5% p.a.",
+        "Never claim 'instant zero-doc approval'",
+        "Never waive the 2-year registered business operation threshold"
+      ]
+    },
+    "cross_border_remittance": {
+      "product_name": "A2A ASEAN Instant FX Remittance",
+      "corridors": ["SG-ID", "SG-MY", "SG-IN", "SG-TH", "SG-VN"],
+      "fx_markup_spread_percent": 0.35,
+      "flat_fee_sgd": 5.0,
+      "sla_minutes": 15,
+      "data_privacy_rule": "Sovereignty strict lock: Plaintext NRIC, NIK, Aadhaar or bank account numbers strictly forbidden across borders."
+    },
+    "high_yield_business_deposit": {
+      "product_name": "Treasury Green Yield Commercial Deposit",
+      "base_rate_percent": 3.2,
+      "max_tiered_rate_percent": 3.8,
+      "min_balance_sgd": 50000,
+      "insured_scheme": "SDIC Singapore (up to 100k SGD) / LPS Indonesia (up to 2B IDR)"
+    },
+    "micro_merchant_credit_line": {
+      "product_name": "Veritas FairMicro Merchant Facility",
+      "max_limit_sgd": 25000,
+      "underwriting_principles": [
+        "Evaluation strictly based on real transaction volume and cashflow velocity.",
+        "MAS FEAT Fairness Principle: Prohibits penalizing credit limit or interest rate based on gender, marital status, or rural geographic postal code.",
+        "Algorithmic explainability disclosure must be supplied upon customer request."
+      ]
+    }
+  },
+  "regulatory_frameworks": {
+    "mas_feat": {
+      "name": "Monetary Authority of Singapore (MAS) FEAT & Veritas Framework",
+      "pillars": {
+        "fairness": "Individuals or groups must not be systematically disadvantaged on basis of protected attributes (gender, race, disability, postal tier).",
+        "ethics": "AI systems must align with bank core values; deceptive sales urgency or coercive dark patterns strictly prohibited.",
+        "accountability": "Internal governance, human-in-the-loop audit logs, and clear ownership of AI decisions.",
+        "transparency": "Explicit disclosure of AI identity, clear explanation of product terms and limitations, no concealed APR terms."
+      }
+    },
+    "indonesia_gr_71_2019": {
+      "name": "Indonesia Government Regulation No. 71 of 2019 (PSTE) & PDP Law No. 27/2022",
+      "rule": "Mandatory data residency & sovereignty for public and critical financial electronic systems. NIK and national identifiers must remain strictly within national border data airlocks unless bilateral safe-harbor treaty applies."
+    },
+    "india_dpdp_2023": {
+      "name": "India Digital Personal Data Protection Act 2023",
+      "rule": "Aadhaar number masking mandatory; outbound AI interactions must provide clear purpose limitation and vernacular consent notice."
+    },
+    "south_korea_pipa": {
+      "name": "South Korea Personal Information Protection Act (PIPA)",
+      "rule": "Resident Registration Numbers (RRN) must be encrypted/omitted; prior affirmative consent required for any cross-border cloud processing."
+    },
+    "australia_pspf_data_airlock": {
+      "name": "Australian Protective Security Policy Framework (PSPF) & Data61 Airlock",
+      "classification_tiers": ["OFFICIAL", "PROTECTED", "SECRET"],
+      "rule": "Data airlock gate must sanitize SECRET and PROTECTED entity markers prior to leaving the local sovereign perimeter."
+    }
+  }
+}
