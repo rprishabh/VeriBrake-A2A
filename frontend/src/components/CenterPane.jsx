@@ -231,7 +231,7 @@ export default function CenterPane({ activeMode, interceptResult, isExecuting })
               </div>
 
               {/* 4 MAS FEAT Score Gauges (Compliance scores: 100 is best) */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-3.5">
                 <FeatGauge 
                   label="Fairness" 
                   score={auditor.feat_scores.fairness} 
@@ -405,7 +405,7 @@ export default function CenterPane({ activeMode, interceptResult, isExecuting })
               </div>
 
               {/* 4 Psychological Threat Vector Gauges (isRiskScore=true: higher is threat!) */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-3.5">
                 <FeatGauge 
                   label="Authority Impersonation" 
                   score={coercion.psychological_markers.authority_impersonation} 

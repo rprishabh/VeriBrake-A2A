@@ -14,7 +14,8 @@ import {
   ExternalLink,
   ChevronRight,
   Database,
-  Radio
+  Radio,
+  X
 } from 'lucide-react';
 
 export default function Sidebar({
@@ -65,9 +66,9 @@ export default function Sidebar({
 
       {/* Sidebar Container */}
       <aside className={`
-        fixed md:sticky top-0 left-0 z-40 md:z-30
-        w-64 h-screen bg-navy-950 border-r border-navy-750 flex flex-col justify-between shrink-0
-        transition-transform duration-300 ease-in-out
+        fixed md:sticky top-0 left-0 z-50 md:z-30
+        w-72 sm:w-64 h-screen bg-navy-950 border-r border-navy-750 flex flex-col justify-between shrink-0
+        transition-transform duration-300 ease-in-out shadow-2xl
         ${isMobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
       `}>
         {/* Top Brand Block */}
@@ -86,6 +87,16 @@ export default function Sidebar({
                 </div>
               </div>
             </div>
+
+            {/* Mobile Close Button */}
+            <button
+              type="button"
+              onClick={() => setIsMobileOpen?.(false)}
+              className="md:hidden p-1.5 rounded-lg bg-navy-850 hover:bg-navy-800 text-slate-400 hover:text-white transition-colors cursor-pointer"
+              aria-label="Close sidebar"
+            >
+              <X className="w-4 h-4" />
+            </button>
           </div>
 
           {/* Navigation Links */}

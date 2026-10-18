@@ -288,10 +288,10 @@ export default function App() {
           
           {/* 1. COMMAND CENTER (PRIMARY 3-PANE COCKPIT) */}
           {currentView === 'command_center' && (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 h-full min-h-[calc(100vh-125px)]">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[calc(100vh-125px)]">
               
-              {/* LANE 1: INPUT COCKPIT (4 cols on large displays) */}
-              <div className="lg:col-span-4 xl:col-span-3.5 h-[680px] lg:h-auto">
+              {/* LANE 1: INPUT COCKPIT */}
+              <div className="lg:col-span-6 xl:col-span-4 min-h-[580px] xl:h-[calc(100vh-125px)]">
                 <LeftPane
                   activeMode={activeMode}
                   setActiveMode={setActiveMode}
@@ -305,8 +305,8 @@ export default function App() {
                 />
               </div>
 
-              {/* LANE 2: INSPECTION TELEMETRY (4.5 cols on large displays) */}
-              <div className="lg:col-span-4 xl:col-span-4.5 h-[680px] lg:h-auto">
+              {/* LANE 2: INSPECTION TELEMETRY */}
+              <div className="lg:col-span-6 xl:col-span-4 min-h-[580px] xl:h-[calc(100vh-125px)]">
                 <CenterPane
                   activeMode={activeMode}
                   interceptResult={interceptResult}
@@ -314,8 +314,8 @@ export default function App() {
                 />
               </div>
 
-              {/* LANE 3: DECISION & AUDIT (4 cols on large displays) */}
-              <div className="lg:col-span-4 xl:col-span-4 h-[680px] lg:h-auto">
+              {/* LANE 3: DECISION & AUDIT */}
+              <div className="lg:col-span-12 xl:col-span-4 min-h-[580px] xl:h-[calc(100vh-125px)]">
                 <RightPane
                   activeMode={activeMode}
                   interceptResult={interceptResult}

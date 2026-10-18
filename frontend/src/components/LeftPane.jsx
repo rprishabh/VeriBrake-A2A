@@ -133,19 +133,25 @@ export default function LeftPane({
                   }`}
                   aria-pressed={isSelected}
                 >
-                  <div className="flex items-start justify-between gap-2 mb-1">
-                    <span className="font-semibold text-slate-200 line-clamp-1 flex items-center gap-1.5 text-xs">
-                      <Icon className={`w-3.5 h-3.5 shrink-0 ${isSelected ? 'text-brand-teal' : 'text-slate-400'}`} />
-                      {sc.name}
-                    </span>
-                    <div className="flex items-center gap-1 shrink-0">
-                      <span className={`px-1.5 py-0.2 rounded text-[9px] font-mono border uppercase font-bold ${
+                  <div className="flex flex-col gap-1 mb-1.5">
+                    <div className="flex items-start justify-between gap-2">
+                      <span className="font-semibold text-slate-100 flex items-center gap-1.5 text-xs leading-snug">
+                        <Icon className={`w-3.5 h-3.5 shrink-0 mt-0.5 ${isSelected ? 'text-brand-teal' : 'text-slate-400'}`} />
+                        <span>{sc.name}</span>
+                      </span>
+                      <span className={`px-1.5 py-0.5 rounded text-[9px] font-mono border uppercase shrink-0 font-bold ${badgeColor}`}>
+                        {sc.expected_verdict.replace(/_/g, ' ')}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-1.5 text-[10px]">
+                      <span className={`px-1.5 py-0.2 rounded font-mono border uppercase font-bold text-[8px] ${
                         isScInbound ? 'bg-indigo-950 text-indigo-300 border-indigo-800' : 'bg-teal-950 text-brand-teal border-teal-800'
                       }`}>
                         {sc.mode}
                       </span>
-                      <span className={`px-1.5 py-0.5 rounded text-[9px] font-mono border uppercase shrink-0 font-semibold ${badgeColor}`}>
-                        {sc.expected_verdict.replace(/_/g, ' ')}
+                      <span className="text-slate-400 font-mono text-[10px] truncate">
+                        {sc.jurisdiction_route || sc.jurisdiction}
                       </span>
                     </div>
                   </div>

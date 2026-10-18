@@ -415,7 +415,7 @@ export default function RightPane({
 
           <div className="rounded-xl border border-navy-750 bg-navy-950 overflow-hidden shadow-inner">
             <div className="overflow-x-auto max-h-56">
-              <table className="w-full text-left text-xs font-mono">
+              <table className="w-full text-left text-xs font-mono min-w-[440px]">
                 <thead className="bg-navy-900 text-[10px] uppercase text-slate-400 border-b border-navy-750 sticky top-0 z-10">
                   <tr>
                     <th className="py-2 px-2.5">Type</th>

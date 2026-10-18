@@ -108,18 +108,20 @@ export default function Header({
             role="radio"
             aria-checked={isOutbound}
             onClick={() => setActiveMode('OUTBOUND')}
-            className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+            className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
               isOutbound
                 ? 'bg-navy-800 text-white shadow-md border border-brand-teal/40 text-brand-teal ring-1 ring-brand-teal/20'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-navy-850/60'
             }`}
           >
-            <Scale className={`w-3.5 h-3.5 ${isOutbound ? 'text-brand-teal' : 'text-slate-400'}`} />
-            <span>Outbound: AI Governance</span>
-            <span className={`text-[9px] font-mono px-1 py-0.2 rounded font-bold uppercase ${
+            <Scale className={`w-3.5 h-3.5 shrink-0 ${isOutbound ? 'text-brand-teal' : 'text-slate-400'}`} />
+            <span className="hidden sm:inline">Outbound: AI Governance</span>
+            <span className="sm:hidden">Outbound</span>
+            <span className={`text-[9px] font-mono px-1 py-0.2 rounded font-bold uppercase shrink-0 ${
               isOutbound ? 'bg-teal-950 text-brand-teal border border-teal-800' : 'bg-navy-950 text-slate-400'
             }`}>
-              MAS FEAT
+              <span className="hidden sm:inline">MAS FEAT</span>
+              <span className="sm:hidden">FEAT</span>
             </span>
           </button>
 
@@ -128,18 +130,20 @@ export default function Header({
             role="radio"
             aria-checked={!isOutbound}
             onClick={() => setActiveMode('INBOUND')}
-            className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+            className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
               !isOutbound
                 ? 'bg-navy-800 text-white shadow-md border border-brand-coral/40 text-rose-300 ring-1 ring-brand-coral/20'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-navy-850/60'
             }`}
           >
-            <AlertOctagon className={`w-3.5 h-3.5 ${!isOutbound ? 'text-rose-400' : 'text-slate-400'}`} />
-            <span>Inbound: Digital Arrest &amp; Fraud</span>
-            <span className={`text-[9px] font-mono px-1 py-0.2 rounded font-bold uppercase ${
+            <AlertOctagon className={`w-3.5 h-3.5 shrink-0 ${!isOutbound ? 'text-rose-400' : 'text-slate-400'}`} />
+            <span className="hidden sm:inline">Inbound: Digital Arrest &amp; Fraud</span>
+            <span className="sm:hidden">Inbound</span>
+            <span className={`text-[9px] font-mono px-1 py-0.2 rounded font-bold uppercase shrink-0 ${
               !isOutbound ? 'bg-rose-950 text-rose-300 border border-rose-800' : 'bg-navy-950 text-slate-400'
             }`}>
-              Anti-Extortion
+              <span className="hidden sm:inline">Anti-Extortion</span>
+              <span className="sm:hidden">Defense</span>
             </span>
           </button>
         </div>
