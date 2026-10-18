@@ -15,6 +15,8 @@ import AnalyticsView from './components/views/AnalyticsView';
 import IntegrationsView from './components/views/IntegrationsView';
 import SettingsView from './components/views/SettingsView';
 
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '');
+
 export default function App() {
   const [activeMode, setActiveMode] = useState('OUTBOUND'); // 'OUTBOUND' | 'INBOUND'
   const [currentView, setCurrentView] = useState('command_center');
@@ -64,10 +66,10 @@ export default function App() {
     setIsRefreshing(true);
     try {
       const [scenariosRes, kpisRes, logsRes, a2aRes] = await Promise.allSettled([
-        fetch('/api/v1/scenarios').then(r => r.json()),
-        fetch('/api/v1/kpis').then(r => r.json()),
-        fetch('/api/v1/audit-logs').then(r => r.json()),
-        fetch('/.well-known/agent.json').then(r => r.json())
+        fetch(`${API_BASE}/api/v1/scenarios`).then(r => r.json()),
+        fetch(`${API_BASE}/api/v1/kpis`).then(r => r.json()),
+        fetch(`${API_BASE}/api/v1/audit-logs`).then(r => r.json()),
+        fetch(`${API_BASE}/.well-known/agent.json`).then(r => r.json())
       ]);
 
       if (scenariosRes.status === 'fulfilled' && Array.isArray(scenariosRes.value)) {
@@ -136,7 +138,7 @@ export default function App() {
     setIsLoading(true);
 
     try {
-      const res = await fetch('/api/v1/intercept', {
+      const res = await fetch(`${API_BASE}/api/v1/intercept`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -159,8 +161,8 @@ export default function App() {
 
       // Re-fetch KPIs and Audit Logs
       const [kpiRes, logsRes] = await Promise.all([
-        fetch('/api/v1/kpis').then(r => r.json()),
-        fetch('/api/v1/audit-logs').then(r => r.json())
+        fetch(`${API_BASE}/api/v1/kpis`).then(r => r.json()),
+        fetch(`${API_BASE}/api/v1/audit-logs`).then(r => r.json())
       ]);
       setKpis(kpiRes);
       setAuditLogs(logsRes);
@@ -177,7 +179,7 @@ export default function App() {
     setIsResolving(true);
 
     try {
-      const res = await fetch(`/api/v1/audit-logs/${logId}/resolve`, {
+      const res = await fetch(`${API_BASE}/api/v1/audit-logs/${logId}/resolve`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -210,8 +212,8 @@ export default function App() {
 
       // Refresh audit logs and KPIs
       const [updatedLogs, updatedKpis] = await Promise.all([
-        fetch('/api/v1/audit-logs').then(r => r.json()),
-        fetch('/api/v1/kpis').then(r => r.json())
+        fetch(`${API_BASE}/api/v1/audit-logs`).then(r => r.json()),
+        fetch(`${API_BASE}/api/v1/kpis`).then(r => r.json())
       ]);
       setAuditLogs(updatedLogs);
       setKpis(updatedKpis);
