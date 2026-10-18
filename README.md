@@ -10,6 +10,34 @@
 
 ---
 
+
+# 🛡️ VeriBrake A2A
+### Autonomous Bidirectional Enterprise Risk & Compliance Mesh for JAPAC BFSI
+
+[![Live Prototype](https://img.shields.io/badge/Live_Prototype-Firebase_Hosting-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://veribrake-a2a-2026.web.app/)
+[![A2A Agent Card](https://img.shields.io/badge/A2A_Protocol-/.well--known/agent.json-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)](https://veribrake-a2a-api-551328304849.asia-southeast1.run.app/.well-known/agent.json)
+[![Demo Video](https://img.shields.io/badge/Demo_Video-YouTube_(3_Min)-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/7_N2WR5NRsw)
+[![License](https://img.shields.io/badge/License-Apache_2.0-2EA44F?style=for-the-badge)](./LICENSE)
+
+---
+
+## 💡 The Inspiration: Why We Built "VeriBrake"
+
+Our architecture was born from two foundational industry truths that define the 2026 Agentic AI era:
+
+> **1. The High-Speed Brake Paradox (Why We Named It *VeriBrake*)**  
+> *"It is amazing how many drivers, even at the Formula One level, think that the brakes are for slowing the car down."* — **Mario Andretti**, Formula 1 World Champion  
+>   
+> As highlighted in **McKinsey & Company’s *State of AI in Southeast Asia*** and **KPMG’s *Trust in AI* Governance Frameworks**, **41% of enterprises** have suffered negative consequences from AI inaccuracy, causing **82% of bank risk teams** to block customer-facing AI deployments. Cars do not have brakes to go slow—they have brakes so they can **drive at 200 mph safely**. **VeriBrake** is that verifiable, sub-2-second safety brake for enterprise banking AI.
+
+> **2. The "Mind & Hand" Agentic Problem Statement**  
+> *"The era of AI that doesn't just talk, but acts, creates, and delivers, is only beginning."* — **Xiao Hong**, Founder & CEO of **Manus AI** (*Mens et Manus* — "Mind and Hand")  
+>   
+> As AI evolves from conversational chatbots (*Mind*) into autonomous agents that execute transactions and trigger APIs (*Hand*), enterprises face a dual crisis: **What stops an outbound bank agent from hallucinating an illegal financial contract or leaking cross-border PII?** And **what stops an inbound human customer from being coerced by a 'Digital Arrest' scammer into draining their life savings?**  
+> Answering **Google Cloud APAC President Karan Bajwa’s** call for open agent interoperability, we built **VeriBrake A2A**—an open Agent2Agent (`/.well-known/agent.json`) circuit breaker positioned directly between the AI’s *Mind* and the bank’s *Hand*.
+
+---
+
 ## 1. Executive Summary
 
 As financial institutions across JAPAC (Singapore, India, Indonesia, Malaysia, Thailand, Australia) confront the dual perils of **autonomous generative AI hallucinations** and **hyper-engineered cyber-extortion scams**, legacy single-direction filters fail:
