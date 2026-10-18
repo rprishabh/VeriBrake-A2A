@@ -1,40 +1,44 @@
 # VeriBrake A2A: Unified Bidirectional Enterprise Risk & Compliance Mesh
-**Official Entry for Google Cloud AI Builder Cup (JAPAC Region)**
 
-[![Cloud Run](https://img.shields.io/badge/Google%20Cloud-Run%20Ready-4285F4?logo=google-cloud&logoColor=white)](https://cloud.google.com/run)
-[![Gemini 2.5 Flash](https://img.shields.io/badge/Google%20GenAI-Gemini%202.5%20Flash-8E75C4?logo=google&logoColor=white)](https://ai.google.dev/)
-[![A2A Protocol](https://img.shields.io/badge/Agent2Agent-A2A%20v0.4-00C49F)](https://a2a-protocol.org)
-[![FastAPI](https://img.shields.io/badge/Backend-FastAPI%20%2B%20Python%203.11-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
-[![React Vite](https://img.shields.io/badge/Frontend-React%2018%20%2B%20Vite%20%2B%20Tailwind-61DAFB?logo=react&logoColor=black)](https://vitejs.dev)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+<!-- ROW 1: Large Clickable Action Buttons for Judges -->
+[![Live Prototype](https://img.shields.io/badge/🚀_Live_Prototype-Firebase_Hosting-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://veribrake-a2a-2026.web.app/)
+[![A2A Agent Card](https://img.shields.io/badge/🔗_A2A_Protocol-/.well--known/agent.json-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)](https://veribrake-a2a-api-551328304849.asia-southeast1.run.app/.well-known/agent.json)
+[![Demo Video](https://img.shields.io/badge/▶️_Watch_Demo-YouTube_(3_Min)-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/7_N2WR5NRsw)
 
----
-
-
-# 🛡️ VeriBrake A2A
-### Autonomous Bidirectional Enterprise Risk & Compliance Mesh for JAPAC BFSI
-
-[![Live Prototype](https://img.shields.io/badge/Live_Prototype-Firebase_Hosting-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://veribrake-a2a-2026.web.app/)
-[![A2A Agent Card](https://img.shields.io/badge/A2A_Protocol-/.well--known/agent.json-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)](https://veribrake-a2a-api-551328304849.asia-southeast1.run.app/.well-known/agent.json)
-[![Demo Video](https://img.shields.io/badge/Demo_Video-YouTube_(3_Min)-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/7_N2WR5NRsw)
-[![License](https://img.shields.io/badge/License-Apache_2.0-2EA44F?style=for-the-badge)](./LICENSE)
+<!-- ROW 2: Sleek Tech Stack Metadata Badges -->
+![Google Cloud](https://img.shields.io/badge/Google_Cloud-Run_Ready-4285F4?style=flat-square&logo=googlecloud&logoColor=white)
+![Gemini 2.5 Flash](https://img.shields.io/badge/Google_GenAI-Gemini_2.5_Flash-8E75B2?style=flat-square&logo=googlegemini&logoColor=white)
+![A2A v0.4](https://img.shields.io/badge/Agent2Agent-A2A_v0.4-2EA44F?style=flat-square)
+![Backend](https://img.shields.io/badge/Backend-FastAPI_+_Python_3.11-009688?style=flat-square&logo=fastapi&logoColor=white)
+![Frontend](https://img.shields.io/badge/Frontend-React_18_+_Vite_+_Tailwind-61DAFB?style=flat-square&logo=react&logoColor=black)
+![License](https://img.shields.io/badge/License-Apache_2.0-blue?style=flat-square)
 
 ---
 
-## 💡 The Inspiration: Why We Built "VeriBrake"
+## The Inspiration: Why We Built "VeriBrake"
 
-Our architecture was born from two foundational industry truths that define the 2026 Agentic AI era:
+Our architecture was born from three foundational industry truths that define the 2026 Agentic AI era:
 
-> **1. The High-Speed Brake Paradox (Why We Named It *VeriBrake*)**  
-> *"It is amazing how many drivers, even at the Formula One level, think that the brakes are for slowing the car down."* — **Mario Andretti**, Formula 1 World Champion  
->   
-> As highlighted in **McKinsey & Company’s *State of AI in Southeast Asia*** and **KPMG’s *Trust in AI* Governance Frameworks**, **41% of enterprises** have suffered negative consequences from AI inaccuracy, causing **82% of bank risk teams** to block customer-facing AI deployments. Cars do not have brakes to go slow—they have brakes so they can **drive at 200 mph safely**. **VeriBrake** is that verifiable, sub-2-second safety brake for enterprise banking AI.
+### 1. The High-Speed 🏎️ Brake Paradox (Why We Named It *VeriBrake*)
+> [!IMPORTANT]
+> **"It is amazing how many drivers, even at the Formula One level, think that the brakes are for slowing the car down... Brakes are what allow you to drive fast safely."**  
+> — **Mario Andretti**, Formula 1 World Champion *(Cited in Enterprise Risk & AI Governance Frameworks)*
 
-> **2. The "Mind & Hand" Agentic Problem Statement**  
-> *"The era of AI that doesn't just talk, but acts, creates, and delivers, is only beginning."* — **Xiao Hong**, Founder & CEO of **Manus AI** (*Mens et Manus* — "Mind and Hand")  
->   
-> As AI evolves from conversational chatbots (*Mind*) into autonomous agents that execute transactions and trigger APIs (*Hand*), enterprises face a dual crisis: **What stops an outbound bank agent from hallucinating an illegal financial contract or leaking cross-border PII?** And **what stops an inbound human customer from being coerced by a 'Digital Arrest' scammer into draining their life savings?**  
-> Answering **Google Cloud APAC President Karan Bajwa’s** call for open agent interoperability, we built **VeriBrake A2A**—an open Agent2Agent (`/.well-known/agent.json`) circuit breaker positioned directly between the AI’s *Mind* and the bank’s *Hand*.
+* **The Research & Architecture Link:** As highlighted in **McKinsey & Company’s *State of AI in Southeast Asia*** and **KPMG’s *Trust in AI* Governance Frameworks**, **41% of enterprises** have suffered negative consequences from AI inaccuracy, causing **82% of bank risk teams** to block customer-facing AI deployments. Race cars do not have brakes to go slow—they have brakes so they can **drive at 200 mph safely**. **VeriBrake** is that verifiable, sub-2-second safety brake that lets regulated financial institutions deploy autonomous AI at full speed without crashing into compliance fines.
+
+### 2. The "Mind & Hand" Agentic Problem Statement
+> [!TIP]
+> **"The era of AI that doesn't just talk, but acts, creates, and delivers, is only beginning."**  
+> — **Xiao Hong**, Founder & CEO of **Manus AI** (*Mens et Manus* — "Mind and Hand")
+
+* **The Architecture Link:** As AI evolves from conversational chatbots (*Mind*) into autonomous agents that execute transactions and trigger APIs (*Hand*), enterprises face a dual crisis: **What stops an outbound bank agent from hallucinating an illegal financial contract?** And **what stops an inbound human customer from being coerced by a 'Digital Arrest' scammer into draining their life savings?** Answering **Google Cloud APAC President Karan Bajwa’s** call for open agent interoperability, we built **VeriBrake A2A**—an open Agent2Agent (`/.well-known/agent.json`) circuit breaker positioned directly between the AI’s *Mind* and the bank’s *Hand*.
+
+### 3. The Sovereign Data Mandate (Cross-Border Airlock)
+> [!NOTE]
+> **"Data is the new type of wealth for our nation; it is now more valuable than oil. Therefore, data sovereignty must be realized, and citizens' personal data must be strictly protected."**  
+> — **Joko Widodo**, President of the Republic of Indonesia *(Catalyst for Indonesia GR 71/2019 & PDP Law)*
+
+* **The Architecture Link:** Because cloud LLMs operate across borders, sending raw customer identifiers to a centralized AI model violates strict regional sovereignty laws (Singapore MAS PDPA, Indonesia GR 71/2019, India DPDP, Korea PIPA). We engineered VeriBrake's **Stage 1: Sovereign Data Airlock** to tokenize citizen identifiers locally in `0.14 ms` before cloud egress—protecting national data sovereignty while harnessing Gemini 2.5 Flash's reasoning.
 
 ---
 
