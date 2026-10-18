@@ -1,12 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
+import Sidebar from './components/Sidebar';
 import LeftPane from './components/LeftPane';
 import CenterPane from './components/CenterPane';
 import RightPane from './components/RightPane';
 import A2ACardModal from './components/A2ACardModal';
+import RequestDetailDrawer from './components/views/RequestDetailDrawer';
+import AgentTrafficView from './components/views/AgentTrafficView';
+import ReviewQueueView from './components/views/ReviewQueueView';
+import PolicyGuardrailsView from './components/views/PolicyGuardrailsView';
+import DataAirlockView from './components/views/DataAirlockView';
+import AuditTrailView from './components/views/AuditTrailView';
+import AnalyticsView from './components/views/AnalyticsView';
+import IntegrationsView from './components/views/IntegrationsView';
+import SettingsView from './components/views/SettingsView';
 
 export default function App() {
   const [activeMode, setActiveMode] = useState('OUTBOUND'); // 'OUTBOUND' | 'INBOUND'
+  const [currentView, setCurrentView] = useState('command_center');
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  
   const [scenarios, setScenarios] = useState([]);
   const [selectedScenarioId, setSelectedScenarioId] = useState('');
   
@@ -43,6 +57,7 @@ export default function App() {
   const [isResolving, setIsResolving] = useState(false);
   const [isA2AModalOpen, setIsA2AModalOpen] = useState(false);
   const [agentCardData, setAgentCardData] = useState(null);
+  const [selectedDrawerRecord, setSelectedDrawerRecord] = useState(null);
 
   // Fetch initial telemetry, scenarios and agent card
   const fetchAllData = async () => {
@@ -185,9 +200,21 @@ export default function App() {
         });
       }
 
-      // Refresh audit logs
-      const updatedLogs = await fetch('/api/v1/audit-logs').then(r => r.json());
+      // Update drawer record if open
+      if (selectedDrawerRecord && selectedDrawerRecord.log_id === logId) {
+        setSelectedDrawerRecord({
+          ...selectedDrawerRecord,
+          resolved_status: result.resolved_status
+        });
+      }
+
+      // Refresh audit logs and KPIs
+      const [updatedLogs, updatedKpis] = await Promise.all([
+        fetch('/api/v1/audit-logs').then(r => r.json()),
+        fetch('/api/v1/kpis').then(r => r.json())
+      ]);
       setAuditLogs(updatedLogs);
+      setKpis(updatedKpis);
     } catch (err) {
       console.error("Failed to resolve audit log:", err);
       alert(`Resolution error: ${err.message}`);
@@ -203,60 +230,164 @@ export default function App() {
     }
   };
 
+  const handleLoadIntoCockpit = (log) => {
+    setInterceptResult(log);
+    if (log.direction) {
+      setActiveMode(log.direction);
+    }
+    setFormData({
+      jurisdiction_route: log.jurisdiction_route || 'ID -> SG',
+      target_dialect: log.target_dialect || 'English',
+      customer_context: log.customer_context || '',
+      draft_message: log.original_message || '',
+      payload_text: log.original_message || '',
+      payment_channel: log.direction === 'INBOUND' ? 'Instant Wire / UPI Transfer' : 'Commercial Facility'
+    });
+    setCurrentView('command_center');
+  };
+
+  const pendingReviewsCount = auditLogs.filter(
+    l => (l.verdict === 'BLOCKED_ESCALATED' || l.verdict === 'CIRCUIT_BREAKER_FROZEN') && !l.resolved_status
+  ).length;
+
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100 font-sans">
-      {/* Top Header with Mode Switcher */}
-      <Header
-        activeMode={activeMode}
-        setActiveMode={setActiveMode}
-        kpis={kpis}
-        onOpenA2ACard={() => setIsA2AModalOpen(true)}
-        onRefreshData={fetchAllData}
-        isRefreshing={isRefreshing}
+    <div className="min-h-screen flex bg-navy-950 text-slate-100 font-sans selection:bg-brand-teal/20 selection:text-brand-teal">
+      
+      {/* Persistent / Responsive Left Sidebar Navigation */}
+      <Sidebar
+        currentView={currentView}
+        setCurrentView={setCurrentView}
+        pendingReviewsCount={pendingReviewsCount}
+        isMobileOpen={isMobileNavOpen}
+        setIsMobileOpen={setIsMobileNavOpen}
       />
 
-      {/* Main 3-Pane Command Center Workspace */}
-      <main className="flex-1 max-w-[1850px] w-full mx-auto p-3 sm:p-4 lg:p-5">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 h-full min-h-[calc(100vh-130px)]">
+      {/* Main Execution View Area */}
+      <div className="flex-1 flex flex-col min-w-0">
+        
+        {/* Top Header */}
+        <Header
+          activeMode={activeMode}
+          setActiveMode={setActiveMode}
+          kpis={kpis}
+          onOpenA2ACard={() => setIsA2AModalOpen(true)}
+          onRefreshData={fetchAllData}
+          isRefreshing={isRefreshing}
+          currentView={currentView}
+          setCurrentView={setCurrentView}
+          isMobileNavOpen={isMobileNavOpen}
+          setIsMobileNavOpen={setIsMobileNavOpen}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
+
+        {/* Dynamic View Container */}
+        <main className="flex-1 max-w-[1920px] w-full mx-auto p-3 sm:p-4 lg:p-5 overflow-y-auto">
           
-          {/* LEFT PANE (3.5 cols on large displays) */}
-          <div className="lg:col-span-4 xl:col-span-3.5 h-[680px] lg:h-auto">
-            <LeftPane
-              activeMode={activeMode}
-              setActiveMode={setActiveMode}
-              scenarios={scenarios}
-              selectedScenarioId={selectedScenarioId}
-              onSelectScenario={handleSelectScenario}
-              formData={formData}
-              setFormData={setFormData}
-              onRunInterceptor={handleRunInterceptor}
-              isLoading={isLoading}
-            />
-          </div>
+          {/* 1. COMMAND CENTER (PRIMARY 3-PANE COCKPIT) */}
+          {currentView === 'command_center' && (
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 h-full min-h-[calc(100vh-125px)]">
+              
+              {/* LANE 1: INPUT COCKPIT (4 cols on large displays) */}
+              <div className="lg:col-span-4 xl:col-span-3.5 h-[680px] lg:h-auto">
+                <LeftPane
+                  activeMode={activeMode}
+                  setActiveMode={setActiveMode}
+                  scenarios={scenarios}
+                  selectedScenarioId={selectedScenarioId}
+                  onSelectScenario={handleSelectScenario}
+                  formData={formData}
+                  setFormData={setFormData}
+                  onRunInterceptor={handleRunInterceptor}
+                  isLoading={isLoading}
+                />
+              </div>
 
-          {/* CENTER PANE (4.5 cols on large displays) */}
-          <div className="lg:col-span-4 xl:col-span-4.5 h-[680px] lg:h-auto">
-            <CenterPane
-              activeMode={activeMode}
-              interceptResult={interceptResult}
-              isExecuting={isLoading}
-            />
-          </div>
+              {/* LANE 2: INSPECTION TELEMETRY (4.5 cols on large displays) */}
+              <div className="lg:col-span-4 xl:col-span-4.5 h-[680px] lg:h-auto">
+                <CenterPane
+                  activeMode={activeMode}
+                  interceptResult={interceptResult}
+                  isExecuting={isLoading}
+                />
+              </div>
 
-          {/* RIGHT PANE (4 cols on large displays) */}
-          <div className="lg:col-span-4 xl:col-span-4 h-[680px] lg:h-auto">
-            <RightPane
-              activeMode={activeMode}
-              interceptResult={interceptResult}
+              {/* LANE 3: DECISION & AUDIT (4 cols on large displays) */}
+              <div className="lg:col-span-4 xl:col-span-4 h-[680px] lg:h-auto">
+                <RightPane
+                  activeMode={activeMode}
+                  interceptResult={interceptResult}
+                  auditLogs={auditLogs}
+                  onResolveLog={handleResolveLog}
+                  onSelectAuditLog={handleSelectAuditLog}
+                  isResolving={isResolving}
+                />
+              </div>
+
+            </div>
+          )}
+
+          {/* 2. AGENT TRAFFIC VIEW */}
+          {currentView === 'traffic' && (
+            <AgentTrafficView
+              auditLogs={auditLogs}
+              onSelectRequest={(item) => setSelectedDrawerRecord(item)}
+              onLoadIntoCockpit={handleLoadIntoCockpit}
+            />
+          )}
+
+          {/* 3. REVIEW QUEUE VIEW */}
+          {currentView === 'reviews' && (
+            <ReviewQueueView
               auditLogs={auditLogs}
               onResolveLog={handleResolveLog}
-              onSelectAuditLog={handleSelectAuditLog}
               isResolving={isResolving}
+              onLoadIntoCockpit={handleLoadIntoCockpit}
             />
-          </div>
+          )}
 
-        </div>
-      </main>
+          {/* 4. POLICY & GUARDRAILS MATRIX */}
+          {currentView === 'policies' && (
+            <PolicyGuardrailsView />
+          )}
+
+          {/* 5. DATA AIRLOCK LAB */}
+          {currentView === 'airlock' && (
+            <DataAirlockView />
+          )}
+
+          {/* 6. AUDIT TRAIL VIEW */}
+          {currentView === 'audit' && (
+            <AuditTrailView
+              auditLogs={auditLogs}
+              onSelectAuditLog={(item) => setSelectedDrawerRecord(item)}
+              onLoadIntoCockpit={handleLoadIntoCockpit}
+            />
+          )}
+
+          {/* 7. RISK INTELLIGENCE ANALYTICS */}
+          {currentView === 'analytics' && (
+            <AnalyticsView
+              auditLogs={auditLogs}
+              kpis={kpis}
+            />
+          )}
+
+          {/* 8. INTEGRATIONS & A2A SPEC */}
+          {currentView === 'integrations' && (
+            <IntegrationsView
+              onOpenA2ACard={() => setIsA2AModalOpen(true)}
+              agentCardData={agentCardData}
+            />
+          )}
+
+          {/* 9. GOVERNANCE SETTINGS */}
+          {currentView === 'settings' && (
+            <SettingsView />
+          )}
+
+        </main>
+      </div>
 
       {/* A2A Protocol Agent Card Modal */}
       <A2ACardModal
@@ -264,6 +395,17 @@ export default function App() {
         onClose={() => setIsA2AModalOpen(false)}
         agentCardData={agentCardData}
       />
+
+      {/* Telemetry Deep-Dive Record Drawer */}
+      <RequestDetailDrawer
+        isOpen={Boolean(selectedDrawerRecord)}
+        onClose={() => setSelectedDrawerRecord(null)}
+        requestData={selectedDrawerRecord}
+        onLoadIntoCockpit={handleLoadIntoCockpit}
+        onResolveLog={handleResolveLog}
+        isResolving={isResolving}
+      />
     </div>
   );
 }
+

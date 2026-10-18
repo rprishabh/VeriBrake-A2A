@@ -16,7 +16,10 @@ import {
   AlertTriangle, 
   Flame, 
   PhoneOff, 
-  ZapOff 
+  ZapOff,
+  Activity,
+  ArrowRight,
+  Shield
 } from 'lucide-react';
 import FeatGauge from './FeatGauge';
 
@@ -25,24 +28,24 @@ export default function CenterPane({ activeMode, interceptResult, isExecuting })
 
   if (isExecuting) {
     return (
-      <div className="flex flex-col h-full bg-slate-900/60 border border-slate-800 rounded-xl items-center justify-center p-8 glass-panel text-center">
-        <div className="relative mb-6">
-          <div className={`w-16 h-16 rounded-full border-4 ${
-            isOutbound ? 'border-emerald-500/20 border-t-emerald-400' : 'border-rose-500/20 border-t-rose-400'
+      <div className="flex flex-col h-full bg-navy-900/85 border border-navy-750 rounded-2xl items-center justify-center p-6 sm:p-8 panel-base text-center shadow-xl">
+        <div className="relative mb-5">
+          <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full border-4 ${
+            isOutbound ? 'border-teal-500/20 border-t-brand-teal' : 'border-rose-500/20 border-t-rose-400'
           } animate-spin`} />
-          <Cpu className={`w-8 h-8 ${isOutbound ? 'text-emerald-400' : 'text-rose-400'} absolute inset-0 m-auto animate-pulse`} />
+          <Cpu className={`w-7 h-7 sm:w-8 sm:h-8 ${isOutbound ? 'text-brand-teal' : 'text-rose-400'} absolute inset-0 m-auto animate-pulse`} />
         </div>
-        <h3 className="text-base font-semibold text-white mb-2">
+        <h3 className="text-sm sm:text-base font-bold text-white mb-2 tracking-tight">
           {isOutbound ? "Executing Outbound 3-Agent Assembly Line" : "Analyzing Inbound Psychological Coercion"}
         </h3>
-        <p className="text-xs text-slate-400 max-w-sm mb-4">
+        <p className="text-xs text-slate-400 max-w-sm mb-4 leading-relaxed">
           {isOutbound 
-            ? "Data Airlock \u2192 MAS FEAT Auditor (Gemini 2.5 Flash) \u2192 Vernacular Rewriter" 
-            : "Data Airlock \u2192 Digital Arrest Extortion Engine \u2192 Friction & SOS Dispatch"}
+            ? "Stage 1: Sovereign Airlock \u2192 Stage 2: MAS FEAT Auditor (Gemini 2.5 Flash) \u2192 Stage 3: Auto-Rewriter & Circuit Breaker" 
+            : "Stage 1: Sovereign Airlock \u2192 Stage 2: Extortion Defense Engine \u2192 Stage 3: Dynamic Friction Funnel"}
         </p>
-        <div className="flex items-center gap-2 text-[11px] font-mono text-emerald-400 bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-800/60">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-          Shared Google ADK Sovereign Defense Pipeline Active
+        <div className="flex items-center gap-2 text-[11px] font-mono text-brand-teal bg-teal-950/70 px-3 py-1 rounded-full border border-teal-800/80">
+          <span className="w-2 h-2 rounded-full bg-brand-teal animate-ping"></span>
+          <span>Google ADK Pipeline Active &bull; Sub-Second Telemetry</span>
         </div>
       </div>
     );
@@ -50,18 +53,18 @@ export default function CenterPane({ activeMode, interceptResult, isExecuting })
 
   if (!interceptResult) {
     return (
-      <div className="flex flex-col h-full bg-slate-900/60 border border-slate-800 rounded-xl items-center justify-center p-8 glass-panel text-center">
-        <div className="w-12 h-12 rounded-xl bg-slate-800/80 flex items-center justify-center mb-4 text-slate-400">
+      <div className="flex flex-col h-full bg-navy-900/85 border border-navy-750 rounded-2xl items-center justify-center p-6 sm:p-8 panel-base text-center shadow-xl">
+        <div className="w-12 h-12 rounded-2xl bg-navy-800 border border-navy-750 flex items-center justify-center mb-4 text-brand-teal shadow-inner">
           <Layers className="w-6 h-6" />
         </div>
-        <h3 className="text-sm font-semibold text-white mb-1">Awaiting Interception Trigger</h3>
-        <p className="text-xs text-slate-400 max-w-xs mb-4">
-          Select a benchmark scenario from the Left Pane or enter custom text and click the Intercept button.
+        <h3 className="text-sm font-bold text-white mb-1 tracking-tight">Awaiting Inspection Trigger</h3>
+        <p className="text-xs text-slate-400 max-w-xs mb-4 leading-relaxed">
+          Select a benchmark scenario from Lane 1 or enter custom text and click the Intercept action button.
         </p>
-        <div className="text-[11px] font-mono text-slate-400 bg-slate-950/80 px-3 py-1.5 rounded-lg border border-slate-800">
+        <div className="text-[11px] font-mono text-slate-400 bg-navy-950 px-3 py-1.5 rounded-lg border border-navy-750">
           {isOutbound 
-            ? "Pipeline: Data Airlock \u2192 MAS FEAT \u2192 Circuit Breaker" 
-            : "Pipeline: Data Airlock \u2192 Extortion Detection \u2192 Friction Funnel"}
+            ? "Pipeline: Sovereign Airlock \u2192 MAS FEAT \u2192 Circuit Breaker" 
+            : "Pipeline: Sovereign Airlock \u2192 Extortion Detection \u2192 Friction Funnel"}
         </div>
       </div>
     );
@@ -90,8 +93,9 @@ export default function CenterPane({ activeMode, interceptResult, isExecuting })
     return parts.map((part, i) => {
       if (tokens.includes(part)) {
         return (
-          <span key={i} className="redacted-token mx-0.5 animate-pulse-subtle">
-            {part}
+          <span key={i} className="redacted-token mx-0.5">
+            <Lock className="w-3 h-3 text-rose-300" />
+            <span>{part}</span>
           </span>
         );
       }
@@ -100,44 +104,45 @@ export default function CenterPane({ activeMode, interceptResult, isExecuting })
   };
 
   return (
-    <div className="flex flex-col h-full bg-slate-900/60 border border-slate-800 rounded-xl overflow-hidden glass-panel">
+    <div className="flex flex-col h-full bg-navy-900/85 border border-navy-750 rounded-2xl overflow-hidden panel-base shadow-xl">
       {/* Pane Header with Total Pipeline Telemetry */}
-      <div className="px-4 py-3 border-b border-slate-800 bg-slate-900/90 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="p-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+      <div className="px-4 py-3 border-b border-navy-750 bg-navy-950/90 flex items-center justify-between">
+        <div className="flex items-center gap-2.5">
+          <div className="p-1.5 rounded-lg bg-teal-500/10 text-brand-teal border border-teal-500/30">
             <Cpu className="w-4 h-4" />
           </div>
           <div>
-            <h2 className="text-sm font-semibold text-white">
-              {isOutbound ? "2. Live MAS FEAT Telemetry & Guardrail" : "2. Inbound Coercion & Fraud Defense Telemetry"}
+            <h2 className="text-xs sm:text-sm font-bold text-white tracking-tight flex items-center gap-1.5">
+              <span>{isOutbound ? "2. Live MAS FEAT Telemetry" : "2. Inbound Coercion Telemetry"}</span>
             </h2>
             <p className="text-[11px] text-slate-400">
               {isOutbound 
-                ? "Outbound deterministic scrubbing + Gemini 2.5 Flash evaluation" 
+                ? "Deterministic PII perimeter + Gemini 2.5 Flash Veritas evaluation" 
                 : "Psychological extortion analysis & Digital Arrest vector scoring"}
             </p>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="flex items-center gap-1 text-xs font-mono px-2.5 py-1 rounded-full bg-slate-950 border border-slate-800 text-slate-300">
-            <Clock className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="font-semibold text-white">{total_latency_ms} ms</span> total
+          <span className="flex items-center gap-1.5 text-xs font-mono px-2.5 py-1 rounded-full bg-navy-950 border border-navy-750 text-slate-300">
+            <Clock className="w-3.5 h-3.5 text-brand-teal" />
+            <span className="font-bold text-white">{total_latency_ms} ms</span>
+            <span className="text-[10px] text-slate-500 hidden sm:inline">total</span>
           </span>
         </div>
       </div>
 
-      <div className="p-4 flex-1 overflow-y-auto space-y-4">
+      <div className="p-3.5 sm:p-4 flex-1 overflow-y-auto space-y-3.5">
 
-        {/* AGENT 1: DATA AIRLOCK (APPLIES TO BOTH MODES) */}
-        <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5 hover:border-slate-700 transition-colors">
+        {/* STAGE 1: SOVEREIGN DATA AIRLOCK (APPLIES TO BOTH DIRECTIONS) */}
+        <div className="bg-navy-950/80 border border-navy-750 rounded-xl p-3.5 hover:border-navy-700 transition-colors">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
-              <span className="flex items-center justify-center w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold border border-blue-500/40">
+              <span className="flex items-center justify-center w-5 h-5 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-bold border border-indigo-500/40">
                 1
               </span>
               <span className="text-xs font-bold text-white uppercase tracking-wider">
-                Agent 1: Data Airlock &amp; Sovereign Perimeter
+                Stage 1: Sovereign Data Airlock
               </span>
             </div>
             <div className="flex items-center gap-2">
@@ -150,7 +155,7 @@ export default function CenterPane({ activeMode, interceptResult, isExecuting })
               }`}>
                 Tier: {airlock.classification_tier}
               </span>
-              <span className="text-[10px] font-mono text-slate-400 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800">
+              <span className="text-[10px] font-mono text-slate-400 bg-navy-900 px-1.5 py-0.5 rounded border border-navy-750">
                 {airlock.latency_ms} ms
               </span>
             </div>
@@ -158,16 +163,16 @@ export default function CenterPane({ activeMode, interceptResult, isExecuting })
 
           <div className="space-y-2">
             <div className="text-[11px] text-slate-400 leading-snug">
-              <span className="font-semibold text-slate-300">Sovereign Policy: </span>
-              {airlock.jurisdiction_policy}
+              <span className="font-semibold text-slate-300">Sovereignty Boundary: </span>
+              <span className="font-mono text-slate-300">{airlock.jurisdiction_policy}</span>
             </div>
 
-            <div className="bg-slate-900/90 border border-slate-800/80 rounded-lg p-2.5 text-xs text-slate-200 font-mono leading-relaxed">
+            <div className="bg-navy-900/90 border border-navy-750 rounded-xl p-2.5 text-xs text-slate-200 font-mono leading-relaxed shadow-inner">
               <div className="text-[10px] uppercase font-sans text-slate-400 mb-1 flex items-center justify-between">
-                <span>Sanitized Local Boundary Payload:</span>
-                <span className="text-amber-400 font-bold">{airlock.redacted_entities_count} PII Tokens Scrubbed</span>
+                <span>Sanitized Payload (Cross-Border Safe):</span>
+                <span className="text-amber-400 font-bold">{airlock.redacted_entities_count} PII Tokens Masked</span>
               </div>
-              <div>{renderHighlightedSanitized(airlock.sanitized_text)}</div>
+              <div className="break-words">{renderHighlightedSanitized(airlock.sanitized_text)}</div>
             </div>
           </div>
         </div>
@@ -175,15 +180,15 @@ export default function CenterPane({ activeMode, interceptResult, isExecuting })
         {/* MODE 1: OUTBOUND MAS FEAT & REWRITER */}
         {isOutbound && auditor && rewriter && (
           <>
-            {/* AGENT 2: MAS FEAT AUDITOR */}
-            <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5 hover:border-slate-700 transition-colors">
+            {/* STAGE 2: MAS FEAT AUDITOR */}
+            <div className="bg-navy-950/80 border border-navy-750 rounded-xl p-3.5 hover:border-navy-700 transition-colors">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 text-xs font-bold border border-purple-500/40">
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-teal-500/20 text-brand-teal text-xs font-bold border border-teal-500/40">
                     2
                   </span>
                   <span className="text-xs font-bold text-white uppercase tracking-wider">
-                    Agent 2: MAS FEAT &amp; Hallucination Auditor
+                    Stage 2: MAS FEAT &amp; Hallucination Auditor
                   </span>
                 </div>
                 
@@ -196,23 +201,23 @@ export default function CenterPane({ activeMode, interceptResult, isExecuting })
                       : 'bg-rose-950/90 text-rose-300 border-rose-700/80'
                   }`}>
                     {auditor.verdict === 'APPROVED' ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : <XCircle className="w-3.5 h-3.5 text-rose-400" />}
-                    {auditor.verdict}
+                    <span>{auditor.verdict}</span>
                   </span>
-                  <span className="text-[10px] font-mono text-slate-400 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800">
+                  <span className="text-[10px] font-mono text-slate-400 bg-navy-900 px-1.5 py-0.5 rounded border border-navy-750">
                     {auditor.latency_ms} ms
                   </span>
                 </div>
               </div>
 
               {/* Model & Risk Score */}
-              <div className="flex items-center justify-between bg-slate-900/80 border border-slate-800 rounded-lg p-2.5 mb-3 text-xs">
+              <div className="flex items-center justify-between bg-navy-900/80 border border-navy-750 rounded-lg p-2.5 mb-3 text-xs">
                 <div className="flex items-center gap-1.5 text-slate-300">
-                  <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+                  <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
                   <span className="font-mono text-[11px] text-slate-300">{auditor.model_used}</span>
                 </div>
                 
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-slate-400">Overall Risk Score:</span>
+                  <span className="text-xs text-slate-400">Risk Severity Score:</span>
                   <span className={`text-sm font-mono font-bold px-2 py-0.5 rounded border ${
                     auditor.overall_risk_score > 75 
                       ? 'bg-rose-950/90 text-rose-300 border-rose-800' 
@@ -225,46 +230,50 @@ export default function CenterPane({ activeMode, interceptResult, isExecuting })
                 </div>
               </div>
 
-              {/* 4 MAS FEAT Score Gauges */}
+              {/* 4 MAS FEAT Score Gauges (Compliance scores: 100 is best) */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
                 <FeatGauge 
                   label="Fairness" 
                   score={auditor.feat_scores.fairness} 
                   description="Veritas: Demographic neutrality"
+                  isRiskScore={false}
                 />
                 <FeatGauge 
                   label="Ethics" 
                   score={auditor.feat_scores.ethics} 
                   description="Anti-coercion & fair dealing"
+                  isRiskScore={false}
                 />
                 <FeatGauge 
                   label="Accountability" 
                   score={auditor.feat_scores.accountability} 
-                  description="Traceability & HITL oversight"
+                  description="Traceability & HITL ownership"
+                  isRiskScore={false}
                 />
                 <FeatGauge 
                   label="Transparency" 
                   score={auditor.feat_scores.transparency} 
-                  description="Truthful APR & AI disclosure"
+                  description="Truthful APR & AI notice"
+                  isRiskScore={false}
                 />
               </div>
 
               {/* Violations List */}
               <div>
                 <div className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2 flex items-center justify-between">
-                  <span>Detected Breaches &amp; Regulatory Citations</span>
-                  <span className="font-mono text-slate-400">{auditor.violations_detected?.length || 0} Breaches</span>
+                  <span>Detected Regulatory Citations &amp; Evidence</span>
+                  <span className="font-mono text-slate-400">{auditor.violations_detected?.length || 0} Flagged</span>
                 </div>
 
                 {auditor.violations_detected?.length === 0 ? (
-                  <div className="p-2.5 rounded-lg bg-emerald-950/30 border border-emerald-900/50 text-xs text-emerald-300 flex items-center gap-2">
+                  <div className="p-2.5 rounded-lg bg-emerald-950/30 border border-emerald-800/60 text-xs text-emerald-300 flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>Zero regulatory violations detected. Clean alignment with MAS FEAT, PDPA &amp; Veritas.</span>
+                    <span>Zero regulatory violations detected. Clean alignment with MAS FEAT, PDPA &amp; Veritas guidelines.</span>
                   </div>
                 ) : (
                   <div className="space-y-1.5">
                     {auditor.violations_detected.map((v, i) => (
-                      <div key={i} className="p-2.5 rounded-lg bg-rose-950/30 border border-rose-900/50 text-xs">
+                      <div key={i} className="p-2.5 rounded-lg bg-rose-950/30 border border-rose-900/60 text-xs">
                         <div className="flex items-center justify-between gap-2 mb-1">
                           <span className="font-semibold text-rose-300 flex items-center gap-1.5">
                             <AlertOctagon className="w-3.5 h-3.5 text-rose-400 shrink-0" />
@@ -284,15 +293,15 @@ export default function CenterPane({ activeMode, interceptResult, isExecuting })
               </div>
             </div>
 
-            {/* AGENT 3: VERNACULAR REWRITER */}
-            <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5 hover:border-slate-700 transition-colors">
+            {/* STAGE 3: VERNACULAR REWRITER & CIRCUIT BREAKER */}
+            <div className="bg-navy-950/80 border border-navy-750 rounded-xl p-3.5 hover:border-navy-700 transition-colors">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
-                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 text-xs font-bold border border-cyan-500/40">
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-bold border border-cyan-500/40">
                     3
                   </span>
                   <span className="text-xs font-bold text-white uppercase tracking-wider">
-                    Agent 3: Vernacular Rewriter &amp; Circuit Breaker
+                    Stage 3: Auto-Rewriter &amp; Circuit Breaker
                   </span>
                 </div>
                 
@@ -304,20 +313,20 @@ export default function CenterPane({ activeMode, interceptResult, isExecuting })
                   }`}>
                     {rewriter.circuit_breaker_active ? "CIRCUIT BREAKER: TRIPPED" : "CIRCUIT BREAKER: CLEAR"}
                   </span>
-                  <span className="text-[10px] font-mono text-slate-400 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800">
+                  <span className="text-[10px] font-mono text-slate-400 bg-navy-900 px-1.5 py-0.5 rounded border border-navy-750">
                     {rewriter.latency_ms} ms
                   </span>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                <div className="p-2 rounded bg-slate-900 border border-slate-800 flex items-center justify-between">
+                <div className="p-2 rounded-lg bg-navy-900 border border-navy-750 flex items-center justify-between">
                   <span className="text-slate-400">Action Dispatched:</span>
                   <span className="font-mono font-semibold text-slate-200">{rewriter.action_taken}</span>
                 </div>
-                <div className="p-2 rounded bg-slate-900 border border-slate-800 flex items-center justify-between">
+                <div className="p-2 rounded-lg bg-navy-900 border border-navy-750 flex items-center justify-between">
                   <span className="text-slate-400">MAS Transparency Notice:</span>
-                  <span className="font-mono text-emerald-400 font-semibold">Mandatory Enforced</span>
+                  <span className="font-mono text-brand-teal font-semibold">Mandatory Enforced</span>
                 </div>
               </div>
             </div>
@@ -327,15 +336,15 @@ export default function CenterPane({ activeMode, interceptResult, isExecuting })
         {/* MODE 2: INBOUND COERCION & DIGITAL ARREST DEFENSE */}
         {!isOutbound && coercion && (
           <>
-            {/* AGENT 2: COERCION DEFENSE ENGINE */}
-            <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5 hover:border-slate-700 transition-colors">
+            {/* STAGE 2: COERCION DEFENSE ENGINE */}
+            <div className="bg-navy-950/80 border border-navy-750 rounded-xl p-3.5 hover:border-navy-700 transition-colors">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
                   <span className="flex items-center justify-center w-5 h-5 rounded-full bg-rose-500/20 text-rose-400 text-xs font-bold border border-rose-500/40">
                     2
                   </span>
                   <span className="text-xs font-bold text-white uppercase tracking-wider">
-                    Agent 2: Psychological Coercion &amp; Digital Arrest Interceptor
+                    Stage 2: Extortion &amp; Digital Arrest Interceptor
                   </span>
                 </div>
                 
@@ -348,18 +357,18 @@ export default function CenterPane({ activeMode, interceptResult, isExecuting })
                       : 'bg-emerald-950/90 text-emerald-300 border-emerald-700/80'
                   }`}>
                     {coercion.verdict === 'CIRCUIT_BREAKER_FROZEN' ? <Flame className="w-3.5 h-3.5 text-rose-400" /> : <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />}
-                    {coercion.verdict.replace(/_/g, ' ')}
+                    <span>{coercion.verdict.replace(/_/g, ' ')}</span>
                   </span>
-                  <span className="text-[10px] font-mono text-slate-400 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800">
+                  <span className="text-[10px] font-mono text-slate-400 bg-navy-900 px-1.5 py-0.5 rounded border border-navy-750">
                     {coercion.latency_ms} ms
                   </span>
                 </div>
               </div>
 
               {/* Coercion Severity Gauge & Mule Risk */}
-              <div className="flex flex-col sm:flex-row items-center justify-between bg-slate-900/80 border border-slate-800 rounded-lg p-3 mb-3 gap-3">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between bg-navy-900/80 border border-navy-750 rounded-xl p-3 mb-3 gap-3">
                 <div>
-                  <div className="text-[10px] uppercase font-mono text-slate-400 mb-0.5">Scam Taxonomy Detected</div>
+                  <div className="text-[10px] uppercase font-mono text-slate-400 mb-0.5">Scam Taxonomy Identified</div>
                   <div className="text-xs font-bold text-rose-300 flex items-center gap-1.5">
                     <AlertTriangle className="w-3.5 h-3.5 text-rose-400 shrink-0" />
                     <span>{coercion.threat_narrative_detected}</span>
@@ -368,7 +377,7 @@ export default function CenterPane({ activeMode, interceptResult, isExecuting })
 
                 <div className="flex items-center gap-3">
                   <div className="text-right">
-                    <span className="block text-[10px] uppercase text-slate-400 font-mono">Mule Account Risk</span>
+                    <span className="block text-[10px] uppercase text-slate-400 font-mono">Mule Escrow Risk</span>
                     <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded border uppercase ${
                       coercion.mule_account_risk === 'CRITICAL'
                         ? 'bg-rose-950 text-rose-300 border-rose-700'
@@ -381,7 +390,7 @@ export default function CenterPane({ activeMode, interceptResult, isExecuting })
                   </div>
 
                   <div className="text-right">
-                    <span className="block text-[10px] uppercase text-slate-400 font-mono">Coercion Severity</span>
+                    <span className="block text-[10px] uppercase text-slate-400 font-mono">Extortion Severity</span>
                     <span className={`text-base font-mono font-bold px-2.5 py-0.5 rounded border ${
                       coercion.coercion_severity_score >= 75
                         ? 'bg-rose-950 text-rose-300 border-rose-700'
@@ -395,38 +404,42 @@ export default function CenterPane({ activeMode, interceptResult, isExecuting })
                 </div>
               </div>
 
-              {/* 4 Psychological Trigger Progress Bars */}
+              {/* 4 Psychological Threat Vector Gauges (isRiskScore=true: higher is threat!) */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
                 <FeatGauge 
                   label="Authority Impersonation" 
                   score={coercion.psychological_markers.authority_impersonation} 
                   description="Fake Police, CBI, Supreme Court"
+                  isRiskScore={true}
                 />
                 <FeatGauge 
                   label="Manufactured Urgency" 
                   score={coercion.psychological_markers.manufactured_urgency} 
-                  description="15-minute countdowns & arrest"
+                  description="15-min countdowns & arrest"
+                  isRiskScore={true}
                 />
                 <FeatGauge 
                   label="Isolation Coercion" 
                   score={coercion.psychological_markers.isolation_tactics} 
-                  description="Do not disconnect video call"
+                  description="Forbidding disconnecting video"
+                  isRiskScore={true}
                 />
                 <FeatGauge 
                   label="Mule Liquidation" 
                   score={coercion.psychological_markers.financial_liquidation} 
-                  description="Transfer to verification escrow"
+                  description="Verification escrow demand"
+                  isRiskScore={true}
                 />
               </div>
 
               {/* Actionable De-escalation Protocol */}
-              <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 text-xs space-y-1.5">
+              <div className="p-3 rounded-xl bg-navy-900 border border-navy-750 text-xs space-y-1.5">
                 <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 flex items-center justify-between">
-                  <span className="flex items-center gap-1 text-slate-300">
+                  <span className="flex items-center gap-1.5 text-slate-300">
                     <PhoneOff className="w-3.5 h-3.5 text-amber-400" />
-                    Recommended De-Escalation Protocol
+                    <span>Recommended De-Escalation Protocol</span>
                   </span>
-                  <span className="text-emerald-400 font-mono font-semibold">120s Citizen Breathing Room</span>
+                  <span className="text-brand-teal font-mono font-semibold">120s Citizen Breathing Room</span>
                 </div>
                 <p className="text-[11px] text-slate-300 leading-relaxed font-sans">
                   {coercion.recommended_intervention}
@@ -434,37 +447,37 @@ export default function CenterPane({ activeMode, interceptResult, isExecuting })
               </div>
             </div>
 
-            {/* AGENT 3: DYNAMIC FRICTION & SOS ALERT */}
-            <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5 hover:border-slate-700 transition-colors">
+            {/* STAGE 3: DYNAMIC FRICTION & SOS DISPATCH */}
+            <div className="bg-navy-950/80 border border-navy-750 rounded-xl p-3.5 hover:border-navy-700 transition-colors">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
                   <span className="flex items-center justify-center w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold border border-amber-500/40">
                     3
                   </span>
                   <span className="text-xs font-bold text-white uppercase tracking-wider">
-                    Agent 3: Dynamic Friction &amp; Family SOS Dispatch
+                    Stage 3: Dynamic Friction &amp; Family SOS Dispatch
                   </span>
                 </div>
                 
                 <span className={`text-[10px] font-mono px-2 py-0.5 rounded border uppercase font-bold ${
                   coercion.webhook_sent 
                     ? 'bg-emerald-950 text-emerald-300 border-emerald-700' 
-                    : 'bg-slate-900 text-slate-400 border-slate-800'
+                    : 'bg-navy-900 text-slate-400 border-navy-750'
                 }`}>
                   {coercion.webhook_sent ? "EMERGENCY SOS: SENT" : "SOS: STANDBY"}
                 </span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                <div className="p-2 rounded bg-slate-900 border border-slate-800 flex items-center justify-between">
-                  <span className="text-slate-400">Transaction Status:</span>
+                <div className="p-2 rounded-lg bg-navy-900 border border-navy-750 flex items-center justify-between">
+                  <span className="text-slate-400">Transit Status:</span>
                   <span className="font-mono font-semibold text-rose-400">
                     {coercion.verdict === 'CIRCUIT_BREAKER_FROZEN' ? "QUARANTINED / FROZEN" : "CLEARED"}
                   </span>
                 </div>
-                <div className="p-2 rounded bg-slate-900 border border-slate-800 flex items-center justify-between">
-                  <span className="text-slate-400">Cool-down Duration:</span>
-                  <span className="font-mono text-cyan-400 font-semibold">{coercion.cooldown_seconds} Seconds Mandated</span>
+                <div className="p-2 rounded-lg bg-navy-900 border border-navy-750 flex items-center justify-between">
+                  <span className="text-slate-400">Breathing Room Timer:</span>
+                  <span className="font-mono text-brand-teal font-semibold">{coercion.cooldown_seconds}s Mandated</span>
                 </div>
               </div>
             </div>
@@ -475,3 +488,4 @@ export default function CenterPane({ activeMode, interceptResult, isExecuting })
     </div>
   );
 }
+

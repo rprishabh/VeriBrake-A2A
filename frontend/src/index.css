@@ -3,61 +3,115 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --bg-deep: #070C15;
+    --bg-surface: #0B1220;
+    --bg-card: #111C2E;
+    --bg-elevated: #172438;
+    --border-subtle: #1E2D4A;
+    --border-strong: #273859;
+    --text-primary: #F4F7FB;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+    --accent-teal: #35D0BA;
+    --accent-emerald: #10B981;
+    --accent-amber: #F59E0B;
+    --accent-coral: #F43F5E;
+    --accent-indigo: #818CF8;
+  }
+
   body {
-    font-family: 'Inter', sans-serif;
-    background-color: #030712;
-    color: #f1f5f9;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-deep);
+    color: var(--text-primary);
+    overflow-x: hidden;
   }
   
-  code, pre {
-    font-family: 'JetBrains Mono', monospace;
+  code, pre, kbd, .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  /* Accessible focus rings */
+  :focus-visible {
+    outline: 2px solid var(--accent-teal);
+    outline-offset: 2px;
   }
 }
 
-/* Custom scrollbars */
+/* Custom crisp scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0b0f17;
+  background: #070C15;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #1E2D4A;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #273859;
 }
 
-/* Glassmorphism panel styling */
-.glass-panel {
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(51, 65, 85, 0.5);
+/* High-contrast enterprise panels */
+.panel-base {
+  background: rgba(11, 18, 32, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(30, 45, 74, 0.7);
 }
 
-.glass-panel-elevated {
-  background: rgba(15, 23, 42, 0.9);
+.panel-elevated {
+  background: rgba(17, 28, 46, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(51, 65, 85, 0.7);
+  border: 1px solid rgba(39, 56, 89, 0.85);
 }
 
-/* Redaction token badge highlight */
+.panel-subtle {
+  background: rgba(7, 12, 21, 0.7);
+  border: 1px solid rgba(30, 45, 74, 0.5);
+}
+
+/* Redaction token badge highlight - strictly masked */
 .redacted-token {
-  display: inline-block;
-  padding: 0.1rem 0.45rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.12rem 0.45rem;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85em;
+  font-size: 0.82em;
   font-weight: 600;
   border-radius: 0.25rem;
-  background: rgba(244, 63, 94, 0.2);
-  color: #fb7185;
-  border: 1px solid rgba(244, 63, 94, 0.5);
-  text-decoration: none;
+  background: rgba(244, 63, 94, 0.15);
+  color: #fda4af;
+  border: 1px solid rgba(244, 63, 94, 0.4);
+  letter-spacing: 0.02em;
 }
+
+/* Subtle pulse for active guardrail telemetry */
+@keyframes subtlePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.65; }
+}
+
+.animate-pulse-subtle {
+  animation: subtlePulse 2.5s ease-in-out infinite;
+}
+
+/* Reduced motion preference support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
